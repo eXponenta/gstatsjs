@@ -1,4 +1,4 @@
-class GLHook {
+export default class GLHook {
 	
 	public drawPasses:number = 0;
 	public isInit:boolean = false;
