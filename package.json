@@ -14,5 +14,8 @@
     "FPS"
   ],
   "author": "eXponenta",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/pixi.js": "^4.7.0"
+  }
 }
