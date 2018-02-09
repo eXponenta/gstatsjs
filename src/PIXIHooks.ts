@@ -1,31 +1,30 @@
-import BaseHooks from "./BaseHooks"
-import GLHook from	"./GLHook"
 
-class PIXIHooks extends BaseHooks {
-	
-	constructor(app:any) {
-		super();
+namespace GStats{
+	export class PIXIHooks extends BaseHooks {
+		
+		constructor(app:any) {
+			super();
 
-		if(!app){
-			console.error("PIXI Application can't passed or NULL");
-			return;
+			if(!app){
+				console.error("PIXI Application can't passed or NULL");
+				return;
+			}
+
+			if(app.renderer instanceof PIXI.WebGLRenderer){
+				
+				this.glhook = new GLHook(app.renderer.gl);
+
+			} else {
+				console.error("[PIXI Hook]Canvas renderer is not allowed");
+			}
 		}
 
-		if(app.renderer instanceof PIXI.WebGLRenderer){
-			
-			this.glhook = new GLHook(app.renderer.gl);
+		public get textureSourcesCount():number{
+			var count:number = Object.keys((PIXI as any).BaseTextureCache).length;
+			this._maxBTCount = Math.max(this._maxBTCount, count);
 
-		} else {
-			console.error("[PIXI Hook]Canvas renderer is not allowed");
+			return count;
 		}
-	}
-	
-	public get textureSourcesCount():number{
-		var count:number = Object.keys((PIXI as any).BaseTextureCache).length;
-		this._maxBTCount = Math.max(this._maxBTCount, count);
-
-		return count;
 	}
 }
 
-export default PIXIHooks;
