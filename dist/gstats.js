@@ -189,6 +189,9 @@ var GStats;
                 this.dcPanel = this.stats.addPanel(new window.Stats.Panel("DC:", "#330570", "#A69700"));
                 this.tcPanel = this.stats.addPanel(new window.Stats.Panel("TC:", "#A62500", "#00B454"));
             }
+            else {
+                console.error("Stats can't found in window, pass instance of Stats.js as second param");
+            }
         }
         StatJSAdapter.prototype.update = function () {
             if (this.stats) {

@@ -12,7 +12,7 @@ namespace GStats{
 		
 		constructor(_gl?:any) {	
 
-			if(_gl){
+			if(_gl ){
 				
 				if(_gl.__proto__.createTexture){
 					this.gl = _gl;
