@@ -34,6 +34,11 @@ namespace GStats{
 			this.realGLDrawElements.call(this.gl, mode, count, type, offset);
 		
 		}
+		public reset():void{
+		
+			this.drawPasses = 0;
+		
+		}
 
 		public release():void{
 
