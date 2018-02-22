@@ -1,6 +1,9 @@
 # gstatsjs
 Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capability with [stats.js](https://github.com/mrdoob/stats.js)
 
+# Examples
+[### PIXI ###](./exampless/pixi)
+
 # Using
 ### PIXI & Stats.js
 
