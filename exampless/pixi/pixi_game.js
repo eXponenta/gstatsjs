@@ -29,7 +29,7 @@ var spavn = function(){
 
    	console.log("destroy:");
    	g.destroy();
-   }, 1000);//Math.random()*1000 + 400);
+   }, 900);//Math.random()*1000 + 400);
 }
 
 setTimeout(spavn , Math.random()*1000 + 300)
