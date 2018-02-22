@@ -1,6 +1,10 @@
 # gstatsjs
 Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capability with [stats.js](https://github.com/mrdoob/stats.js)
 
+#Remarks
+
+Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pixi.js/issues/4692),  TextureCounter incorrectly gets the number of textures.
+
 # Examples
 [### PIXI ###](./exampless/pixi)
 
