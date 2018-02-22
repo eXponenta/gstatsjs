@@ -20,8 +20,8 @@ namespace GStats{
 					this.realGLDeleteTexture = _gl.__proto__.deleteTexture;
 
 					//replace to new function
-					_gl.__proto__.createTexture = this.fakeGLCreateTexture;
-					_gl.__proto__.deleteTexture = this.fakeGLDeleteTexture;
+					_gl.__proto__.createTexture = this.fakeGLCreateTexture.bind(this);
+					_gl.__proto__.deleteTexture = this.fakeGLDeleteTexture.bind(this);
 					
 					this.isInit = true;
 
@@ -39,11 +39,15 @@ namespace GStats{
 
 		private fakeGLCreateTexture():void {
 			this.createdTextures ++;
+
+			console.log("created:", this.createdTextures);
 			return this.realGLCreateTexture.call(this.gl);
 		}
 
 		private fakeGLDeleteTexture(texture:any):void {
+
 			this.deletedTextures ++;
+			console.log("deleted:", this.deletedTextures);
 			this.realGLDeleteTexture.call(this.gl, texture);
 		}
 		public reset():void{

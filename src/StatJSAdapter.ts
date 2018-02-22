@@ -1,5 +1,5 @@
 namespace GStats{
-	export class StatJSAdapter {
+	export class StatsJSAdapter {
 		public stats:any;
 		public dcPanel?:any;
 		public tcPanel?:any;
@@ -14,17 +14,18 @@ namespace GStats{
 				this.stats = _stats;
 			
 			}else {
-				
+
+				this.stats = null;				
 				if((window as any).Stats){
 					this.stats = new ((window as any).Stats)();
 				}
 
-				this.stats = null;
 			}
 
 			if(this.stats){
 				this.dcPanel =  this.stats.addPanel(new (window as any).Stats.Panel("DC:", "#330570","#A69700"));
 				this.tcPanel =  this.stats.addPanel(new (window as any).Stats.Panel("TC:", "#A62500","#00B454"));
+				this.stats.showPanel(0);
 			} else {
 				console.error("Stats can't found in window, pass instance of Stats.js as second param");
 			}
@@ -33,14 +34,15 @@ namespace GStats{
 
 		update():void{
 			if(this.stats){
-				this.stats.update();
 
 				if(this.hook){
 
-					this.dcPanel.update(this.hook.deltaDrawCalls, this.hook.maxDeltaDrawCalls);
-					this.tcPanel.update(this.hook.texturesCount, this.hook.maxTextureCount);
+					this.dcPanel.update(this.hook.deltaDrawCalls, Math.max(50, this.hook.maxDeltaDrawCalls) );
+					this.tcPanel.update(this.hook.texturesCount, Math.max(20, this.hook.maxTextureCount) );
 
 				}
+
+				this.stats.update();
 			}
 		}
 

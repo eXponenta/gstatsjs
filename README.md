@@ -7,7 +7,8 @@ Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capabili
 ```javascript
 var app = new PIXI.Application (options);
 var pixiHooks = new GStats.PIXIHooks(app);
-var stats = new GStats.StatJSAdapter(pixiHooks);
+var stats = new GStats.StatsJSAdapter(pixiHooks);
+document.body.appendChild(stats.stats.dom || stats.stats.domElement);
 app.ticker.add(stats.update);
 ```
 
@@ -15,7 +16,8 @@ app.ticker.add(stats.update);
 ```javascript
 var game = new Phaser.Game(options);
 var phaserHooks = new GStats.PhaserHooks(game);
-var stats = new GStats.StatJSAdapter(pixiHooks);
+var stats = new GStats.StatsJSAdapter(pixiHooks);
+document.body.appendChild(stats.stats.dom || stats.stats.domElement);
 
 //or other update function
 function update() {
@@ -30,7 +32,9 @@ coming soon...
 var gl = // WebGL2RenderingContext;
 var baseHooks = new GStats.BaseHooks();
     baseHooks.attach(gl);
-var stats = new GStats.StatJSAdapter(baseHooks);
+var stats = new GStats.StatsJSAdapter(baseHooks);
+
+document.body.appendChild(stats.stats.dom || stats.stats.domElement);
 
 //or other update function
 function update() {

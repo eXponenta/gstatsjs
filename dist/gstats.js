@@ -90,7 +90,7 @@ var GStats;
                     this.gl = _gl;
                     this.realGLDrawElements = _gl.__proto__.drawElements;
                     //replace to new function
-                    _gl.__proto__.drawElements = this.fakeGLdrawElements;
+                    _gl.__proto__.drawElements = this.fakeGLdrawElements.bind(this);
                     this.isInit = true;
                     console.log("[GLHook] GL was Hooked!");
                 }
@@ -173,42 +173,43 @@ var GStats;
 })(GStats || (GStats = {}));
 var GStats;
 (function (GStats) {
-    var StatJSAdapter = /** @class */ (function () {
-        function StatJSAdapter(_hook, _stats) {
+    var StatsJSAdapter = /** @class */ (function () {
+        function StatsJSAdapter(_hook, _stats) {
             this.hook = _hook;
             if (_stats) {
                 this.stats = _stats;
             }
             else {
+                this.stats = null;
                 if (window.Stats) {
                     this.stats = new (window.Stats)();
                 }
-                this.stats = null;
             }
             if (this.stats) {
                 this.dcPanel = this.stats.addPanel(new window.Stats.Panel("DC:", "#330570", "#A69700"));
                 this.tcPanel = this.stats.addPanel(new window.Stats.Panel("TC:", "#A62500", "#00B454"));
+                this.stats.showPanel(0);
             }
             else {
                 console.error("Stats can't found in window, pass instance of Stats.js as second param");
             }
         }
-        StatJSAdapter.prototype.update = function () {
+        StatsJSAdapter.prototype.update = function () {
             if (this.stats) {
-                this.stats.update();
                 if (this.hook) {
-                    this.dcPanel.update(this.hook.deltaDrawCalls, this.hook.maxDeltaDrawCalls);
-                    this.tcPanel.update(this.hook.texturesCount, this.hook.maxTextureCount);
+                    this.dcPanel.update(this.hook.deltaDrawCalls, Math.max(50, this.hook.maxDeltaDrawCalls));
+                    this.tcPanel.update(this.hook.texturesCount, Math.max(20, this.hook.maxTextureCount));
                 }
+                this.stats.update();
             }
         };
-        StatJSAdapter.prototype.reset = function () {
+        StatsJSAdapter.prototype.reset = function () {
             if (this.hook)
                 this.hook.reset();
         };
-        return StatJSAdapter;
+        return StatsJSAdapter;
     }());
-    GStats.StatJSAdapter = StatJSAdapter;
+    GStats.StatsJSAdapter = StatsJSAdapter;
 })(GStats || (GStats = {}));
 var GStats;
 (function (GStats) {
@@ -225,8 +226,8 @@ var GStats;
                     this.realGLCreateTexture = _gl.__proto__.createTexture;
                     this.realGLDeleteTexture = _gl.__proto__.deleteTexture;
                     //replace to new function
-                    _gl.__proto__.createTexture = this.fakeGLCreateTexture;
-                    _gl.__proto__.deleteTexture = this.fakeGLDeleteTexture;
+                    _gl.__proto__.createTexture = this.fakeGLCreateTexture.bind(this);
+                    _gl.__proto__.deleteTexture = this.fakeGLDeleteTexture.bind(this);
                     this.isInit = true;
                     console.log("[TextureHook] GL was Hooked!");
                 }
@@ -244,10 +245,12 @@ var GStats;
         });
         TextureHook.prototype.fakeGLCreateTexture = function () {
             this.createdTextures++;
+            console.log("created:", this.createdTextures);
             return this.realGLCreateTexture.call(this.gl);
         };
         TextureHook.prototype.fakeGLDeleteTexture = function (texture) {
             this.deletedTextures++;
+            console.log("deleted:", this.deletedTextures);
             this.realGLDeleteTexture.call(this.gl, texture);
         };
         TextureHook.prototype.reset = function () {

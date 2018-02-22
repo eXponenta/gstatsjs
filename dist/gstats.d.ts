@@ -38,7 +38,7 @@ declare namespace GStats {
     }
 }
 declare namespace GStats {
-    class StatJSAdapter {
+    class StatsJSAdapter {
         stats: any;
         dcPanel?: any;
         tcPanel?: any;

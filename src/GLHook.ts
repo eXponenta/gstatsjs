@@ -17,7 +17,7 @@ namespace GStats{
 					this.realGLDrawElements = _gl.__proto__.drawElements;
 					
 					//replace to new function
-					_gl.__proto__.drawElements = this.fakeGLdrawElements;
+					_gl.__proto__.drawElements = this.fakeGLdrawElements.bind(this);
 					this.isInit = true;
 
 					console.log("[GLHook] GL was Hooked!");
