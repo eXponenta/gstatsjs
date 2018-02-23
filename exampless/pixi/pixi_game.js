@@ -13,26 +13,22 @@ app.stage.interactive = true;
 
 var spavn = function(){
    
-   console.log("spavn:");
-   
    var g = new PIXI.Graphics();
 
    g.beginFill(0xFF3300 * Math.random());
    g.lineStyle(2, 0xFFFFFF * Math.random(), 1);
-   g.drawRect(Math.random() * 500, Math.random() * 700, 100, 100);
+   g.drawRect(Math.random() * 700, Math.random() * 500, 100, 100);
    g.cacheAsBitmap = true;
    app.stage.addChild(g);
    
-   setTimeout(spavn ,1000);// Math.random()*1000 + 300);
+   setTimeout(spavn , Math.random()*1000);
 
    setTimeout(function() {
-
-   	console.log("destroy:");
    	g.destroy();
-   }, 900);//Math.random()*1000 + 400);
+   }, 3000);
 }
 
-setTimeout(spavn , Math.random()*1000 + 300)
+setTimeout(spavn , Math.random()*1000)
 
 // let's create a moving shape
 var thing = new PIXI.Graphics();
