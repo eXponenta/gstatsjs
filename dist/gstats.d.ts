@@ -50,7 +50,7 @@ declare namespace GStats {
 }
 declare namespace GStats {
     class TextureHook {
-        createdTextures: number;
+        createdTextures: Array<any>;
         deletedTextures: number;
         isInit: boolean;
         private realGLCreateTexture;

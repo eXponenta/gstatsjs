@@ -1,7 +1,7 @@
 namespace GStats{
 	export class TextureHook {
 		
-		public createdTextures:number = 0;
+		public createdTextures:Array<any> = new Array<any>();
 		public deletedTextures:number = 0;
 
 		public isInit:boolean = false;
@@ -34,24 +34,32 @@ namespace GStats{
 		}
 
 		public get currentTextureCount():number{
-			return (this.createdTextures - this.deletedTextures);
+			return (this.createdTextures.length - this.deletedTextures);
 		}
 
-		private fakeGLCreateTexture():void {
-			this.createdTextures ++;
-
-			console.log("created:", this.createdTextures);
-			return this.realGLCreateTexture.call(this.gl);
+		private fakeGLCreateTexture():any {
+			
+			var texture = this.realGLCreateTexture.call(this.gl);
+			
+			this.createdTextures.push(texture);// ++;
+			console.log("created:", this.createdTextures.length);
+			return texture;
 		}
 
 		private fakeGLDeleteTexture(texture:any):void {
 
-			this.deletedTextures ++;
-			console.log("deleted:", this.deletedTextures);
+			var index:number = this.createdTextures.indexOf(texture);
+			if(index > -1)
+			{
+				this.createdTextures.slice(index, 1);
+				this.deletedTextures ++;
+				console.log("deleted:", this.deletedTextures);
+			}
+
 			this.realGLDeleteTexture.call(this.gl, texture);
 		}
 		public reset():void{
-			this.createdTextures = 0;
+			this.createdTextures = new Array<any>();
 			this.deletedTextures = 0;
 		}
 		public release():void{
