@@ -252,7 +252,7 @@ var GStats;
         TextureHook.prototype.fakeGLDeleteTexture = function (texture) {
             var index = this.createdTextures.indexOf(texture);
             if (index > -1) {
-                this.createdTextures.slice(index, 1);
+                this.createdTextures = this.createdTextures.slice(index, 1);
                 this.deletedTextures++;
                 console.log("deleted:", this.deletedTextures);
             }

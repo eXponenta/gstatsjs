@@ -51,7 +51,7 @@ namespace GStats{
 			var index:number = this.createdTextures.indexOf(texture);
 			if(index > -1)
 			{
-				this.createdTextures.slice(index, 1);
+				this.createdTextures = this.createdTextures.slice(index, 1);
 				this.deletedTextures ++;
 				console.log("deleted:", this.deletedTextures);
 			}
