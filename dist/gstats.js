@@ -45,7 +45,7 @@ var GStats;
         Object.defineProperty(BaseHooks.prototype, "maxTextureCount", {
             get: function () {
                 if (this.texturehook && this.texturehook.isInit)
-                    return this.texturehook.createdTextures.length;
+                    return this.texturehook.maxTexturesCount;
                 return 0;
             },
             enumerable: true,
@@ -216,7 +216,7 @@ var GStats;
     var TextureHook = /** @class */ (function () {
         function TextureHook(_gl) {
             this.createdTextures = new Array();
-            this.deletedTextures = 0;
+            this.maxTexturesCount = 0;
             this.isInit = false;
             this.realGLCreateTexture = function () { };
             this.realGLDeleteTexture = function () { };
@@ -238,7 +238,7 @@ var GStats;
         }
         Object.defineProperty(TextureHook.prototype, "currentTextureCount", {
             get: function () {
-                return (this.createdTextures.length - this.deletedTextures);
+                return this.createdTextures.length;
             },
             enumerable: true,
             configurable: true
@@ -246,21 +246,21 @@ var GStats;
         TextureHook.prototype.fakeGLCreateTexture = function () {
             var texture = this.realGLCreateTexture.call(this.gl);
             this.createdTextures.push(texture); // ++;
-            console.log("created:", this.createdTextures.length);
+            this.maxTexturesCount = this.createdTextures.length;
+            //console.log("created:", this.createdTextures.length);
             return texture;
         };
         TextureHook.prototype.fakeGLDeleteTexture = function (texture) {
             var index = this.createdTextures.indexOf(texture);
             if (index > -1) {
                 this.createdTextures = this.createdTextures.slice(index, 1);
-                this.deletedTextures++;
-                console.log("deleted:", this.deletedTextures);
+                //console.log("deleted:", this.createdTextures.length);
             }
             this.realGLDeleteTexture.call(this.gl, texture);
         };
         TextureHook.prototype.reset = function () {
             this.createdTextures = new Array();
-            this.deletedTextures = 0;
+            this.maxTexturesCount = 0;
         };
         TextureHook.prototype.release = function () {
             if (this.isInit) {

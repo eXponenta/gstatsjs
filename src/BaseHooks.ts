@@ -45,7 +45,7 @@ namespace GStats{
 			public get maxTextureCount():number {
 	
 				if(this.texturehook && this.texturehook.isInit)
-					return this.texturehook.createdTextures.length;
+					return this.texturehook.maxTexturesCount;
 				return 0;
 			}
 
