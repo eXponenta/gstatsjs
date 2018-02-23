@@ -51,7 +51,6 @@ declare namespace GStats {
 declare namespace GStats {
     class TextureHook {
         createdTextures: Array<any>;
-        createdTexturesCount: number;
         maxTexturesCount: number;
         isInit: boolean;
         private realGLCreateTexture;
