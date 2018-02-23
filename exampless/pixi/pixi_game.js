@@ -3,14 +3,6 @@ var app = new PIXI.Application(800, 600, { antialias: true });
 
 document.body.appendChild(app.view);
 
-var pixi_gstats = new GStats.PIXIHooks(app);
-var st = new GStats.StatsJSAdapter(pixi_gstats);
-
-document.body.appendChild(st.stats.dom || st.stats.domElement);
-
-app.stage.interactive = true;
-
-
 var spavn = function(){
    
    var g = new PIXI.Graphics();
@@ -24,11 +16,19 @@ var spavn = function(){
    setTimeout(spavn , Math.random()*1000);
 
    setTimeout(function() {
-   	g.destroy();
+    g.destroy();
    }, 3000);
 }
 
 setTimeout(spavn , Math.random()*1000)
+
+var st = null;
+setTimeout(function(){
+  var pixi_gstats = new GStats.PIXIHooks(app);
+  st = new GStats.StatsJSAdapter(pixi_gstats);
+
+  document.body.appendChild(st.stats.dom || st.stats.domElement);
+}, 1000);
 
 // let's create a moving shape
 var thing = new PIXI.Graphics();
@@ -54,5 +54,7 @@ app.ticker.add(function() {
 
     thing.rotation = count * 0.1;
 
-    st.update();
+    if(st){
+      st.update();
+    }
 });

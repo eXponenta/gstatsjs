@@ -16,6 +16,7 @@ namespace GStats{
 				var start_textures = app.renderer.textureManager._managedTextures;
 				
 				if(start_textures && this.texturehook){
+					console.log("[PIXI Hooks] Collect used textures:", start_textures.length);
 					for (var i = 0; i < start_textures.length; ++i) {
 						var txr = start_textures[i];
 						var gltextures = txr._glTextures;
