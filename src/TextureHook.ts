@@ -1,7 +1,7 @@
 namespace GStats{
 	export class TextureHook {
 		
-		private createdTextures:Array<any> = new Array<any>();
+		public createdTextures:Array<any> = new Array<any>();
 		public createdTexturesCount: number = 0;
 		public maxTexturesCount:number = 0;
 
@@ -38,25 +38,28 @@ namespace GStats{
 			return this.createdTexturesCount;
 		}
 
+		public registerTexture(texture:any):void {
+			this.createdTextures.push(texture);// ++;
+			this.createdTexturesCount = this.createdTextures.length; 
+			this.maxTexturesCount = Math.max(this.createdTexturesCount, this.maxTexturesCount);
+		}
+		
 		private fakeGLCreateTexture():any {
 			
 			var texture = this.realGLCreateTexture.call(this.gl);
-			
-			this.createdTextures.push(texture);// ++;
-			this.createdTexturesCount = this.createdTextures.length; 
-			
-			this.maxTexturesCount = Math.max(this.createdTexturesCount, this.maxTexturesCount);
-
+			this.registerTexture(texture);
 			//console.log("created:", this.createdTextures.length);
 			return texture;
 		}
+
+
 
 		private fakeGLDeleteTexture(texture:any):void {
 
 			var index:number = this.createdTextures.indexOf(texture);
 			if(index > -1)
 			{
-				this.createdTextures = this.createdTextures.slice(index, 1);
+				this.createdTextures.splice(index, 1);
 				this.createdTexturesCount = this.createdTextures.length; 
 				//console.log("deleted:", this.createdTextures.length);
 			}

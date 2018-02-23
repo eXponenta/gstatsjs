@@ -161,6 +161,18 @@ var GStats;
             }
             if (app.renderer instanceof PIXI.WebGLRenderer) {
                 _this.attach(app.renderer.gl);
+                var start_textures = app.renderer.textureManager._managedTextures;
+                if (start_textures && _this.texturehook) {
+                    for (var i = 0; i < start_textures.length; ++i) {
+                        var txr = start_textures[i];
+                        var gltextures = txr._glTextures;
+                        for (var j = 0; j < gltextures.length; ++j) {
+                            if (gltextures[j].gl === app.renderer.gl) {
+                                _this.texturehook.registerTexture(gltextures[j].texture);
+                            }
+                        }
+                    }
+                }
             }
             else {
                 console.error("[PIXI Hook]Canvas renderer is not allowed");
@@ -244,18 +256,21 @@ var GStats;
             enumerable: true,
             configurable: true
         });
-        TextureHook.prototype.fakeGLCreateTexture = function () {
-            var texture = this.realGLCreateTexture.call(this.gl);
+        TextureHook.prototype.registerTexture = function (texture) {
             this.createdTextures.push(texture); // ++;
             this.createdTexturesCount = this.createdTextures.length;
             this.maxTexturesCount = Math.max(this.createdTexturesCount, this.maxTexturesCount);
+        };
+        TextureHook.prototype.fakeGLCreateTexture = function () {
+            var texture = this.realGLCreateTexture.call(this.gl);
+            this.registerTexture(texture);
             //console.log("created:", this.createdTextures.length);
             return texture;
         };
         TextureHook.prototype.fakeGLDeleteTexture = function (texture) {
             var index = this.createdTextures.indexOf(texture);
             if (index > -1) {
-                this.createdTextures = this.createdTextures.slice(index, 1);
+                this.createdTextures.splice(index, 1);
                 this.createdTexturesCount = this.createdTextures.length;
                 //console.log("deleted:", this.createdTextures.length);
             }
