@@ -34,7 +34,7 @@ app.ticker.add(stats.update);
 ```javascript
 var game = new Phaser.Game(options);
 var phaserHooks = new GStats.PhaserHooks(game);
-var stats = new GStats.StatsJSAdapter(pixiHooks);
+var stats = new GStats.StatsJSAdapter(phaserHooks);
 document.body.appendChild(stats.stats.dom || stats.stats.domElement);
 
 //or other update function
