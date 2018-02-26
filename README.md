@@ -9,7 +9,8 @@ Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pi
 [PIXI Stats.js example](./exampless/pixi) - show PIXI game Draw Calls and Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/). 
 
 [Phaser 2 CE Stats.js example](./exampless/phaser2ce) - show Phaser 2 CE game Draw Calls and Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/). 
-Textures amount for Phaser is relative value, and must be negative.
+
+Textures amount for Phaser is relative value, and may be negative.
 
 # Using
 ### PIXI & Stats.js
