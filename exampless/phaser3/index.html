@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>GStats Phaser 3 Example</title>
+  <meta name="author" content="rondo.devil@gmail.com">
+
+  <style type="text/css">
+  	html, body {
+  		padding: 0;
+  	}
+  	:not(div) > canvas {
+  		position: absolute;
+  		top: 50%;
+  		left: 50%;
+  		transform: translate(-50%,-50%); 
+  	}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <!--PHASER 3 CE-->
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.1.2/dist/phaser.min.js"></script>
+  <!--STATS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+
+  <!--GSTATS-->
+  <script src="../../dist/gstats.js"></script>
+  <!--GAME-->
+  <!--examples from http://pixijs.io/examples/#/demos/graphics-demo.js -->
+  <script type="text/javascript" src="./phaser3_game.js"></script>  
+</body>
+</html>
