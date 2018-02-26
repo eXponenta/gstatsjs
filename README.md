@@ -8,9 +8,16 @@ Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pi
 # Examples
 [PIXI Stats.js example](./exampless/pixi) - show PIXI game Draw Calls and Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/). 
 
-[Phaser 2 CE Stats.js example](./exampless/phaser2ce) - show Phaser 2 CE game Draw Calls and Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/). 
+[Phaser 2 CE Stats.js example](./exampless/phaser2ce) - show Phaser 2 CE game Draw Calls and Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/).
 
 Textures amount for Phaser is relative value, and may be negative.
+
+[Phaser 3 Stats.js example](./exampless/phaser2ce) - show Phaser 3 Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/).
+
+How i can destroy sprite in Phaser 3 with its texture ? 
+
+Currently DC can't work, becouse Phaser 3 use DrawArrays for rendering WebGL. 
+Textures amount for Phaser3 is relative value, and may be negative.
 
 # Using
 ### PIXI & Stats.js
@@ -23,7 +30,7 @@ document.body.appendChild(stats.stats.dom || stats.stats.domElement);
 app.ticker.add(stats.update);
 ```
 
-### Phaser & Stats.js
+### Phaser 2/3 & Stats.js
 ```javascript
 var game = new Phaser.Game(options);
 var phaserHooks = new GStats.PhaserHooks(game);
