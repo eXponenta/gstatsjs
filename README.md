@@ -12,7 +12,7 @@ Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pi
 
 Textures amount for Phaser is relative value, and may be negative.
 
-[Phaser 3 Stats.js example](./exampless/phaser2ce) - show Phaser 3 Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/).
+[Phaser 3 Stats.js example](./exampless/phaser3) - show Phaser 3 Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/).
 
 How i can destroy sprite in Phaser 3 with its texture ? 
 
