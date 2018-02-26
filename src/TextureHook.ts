@@ -46,19 +46,16 @@ namespace GStats{
 			
 			var texture = this.realGLCreateTexture.call(this.gl);
 			this.registerTexture(texture);
-			//console.log("created:", this.createdTextures.length);
 			return texture;
 		}
 
 
 
 		private fakeGLDeleteTexture(texture:any):void {
-
 			var index:number = this.createdTextures.indexOf(texture);
 			if(index > -1)
 			{
 				this.createdTextures.splice(index, 1);
-				//console.log("deleted:", this.createdTextures.length);
 			}
 
 			this.realGLDeleteTexture.call(this.gl, texture);

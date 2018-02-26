@@ -263,14 +263,12 @@ var GStats;
         TextureHook.prototype.fakeGLCreateTexture = function () {
             var texture = this.realGLCreateTexture.call(this.gl);
             this.registerTexture(texture);
-            //console.log("created:", this.createdTextures.length);
             return texture;
         };
         TextureHook.prototype.fakeGLDeleteTexture = function (texture) {
             var index = this.createdTextures.indexOf(texture);
             if (index > -1) {
                 this.createdTextures.splice(index, 1);
-                //console.log("deleted:", this.createdTextures.length);
             }
             this.realGLDeleteTexture.call(this.gl, texture);
         };

@@ -6,7 +6,9 @@ Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capabili
 Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pixi.js/issues/4692),  TextureCounter incorrectly gets the number of textures.
 
 # Examples
-[### PIXI ###](./exampless/pixi)
+[ ### PIXI ### ](./exampless/pixi)
+
+[ ### Phaser 2 CE ### ](./exampless/phaser2ce)
 
 # Using
 ### PIXI & Stats.js
