@@ -3,7 +3,10 @@ Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capabili
 
 # Remarks
 
-Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pixi.js/issues/4692),  TextureCounter incorrectly gets the number of textures.
+~~Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pixi.js/issues/4692),  TextureCounter incorrectly gets the number of textures.~~
+
+Currently Draw Calls counter can't work on Phaser 3, because Phaser 3 use DrawArrays for rendering WebGL instead DrawElements. 
+Textures amount for Phaser 2 and 3 is relative value, and may be negative.
 
 # Examples
 [PIXI Stats.js example](./exampless/pixi) - show PIXI game Draw Calls and Textures Count statistics by [Stas.js](https://github.com/mrdoob/stats.js/). 
@@ -16,7 +19,7 @@ Textures amount for Phaser is relative value, and may be negative.
 
 How i can destroy sprite in Phaser 3 with its texture ? 
 
-Currently DC can't work, becouse Phaser 3 use DrawArrays for rendering WebGL. 
+Currently DC can't work, because Phaser 3 use DrawArrays for rendering WebGL. 
 Textures amount for Phaser3 is relative value, and may be negative.
 
 # Using
