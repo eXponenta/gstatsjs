@@ -1,8 +1,8 @@
 {
-  "name": "pixi_stats",
+  "name": "gstatsjs",
   "version": "0.0.1",
   "description": "Show DrawCalls, FPS, Texture Count on PIXI, Phaser projects",
-  "main": "dist/stats.js",
+  "main": "dist/gstats.js",
   "scripts": {
     "watch": "tsc -w -p .",
     "build": "tsc -p .",
