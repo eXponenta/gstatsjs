@@ -1,6 +1,15 @@
 # gstatsjs
 Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capability with [stats.js](https://github.com/mrdoob/stats.js)
 
+The library can be found in [`dist/gstats.js`](https://github.com/eXponenta/gstatsjs/blob/master/dist/gstats.js).
+
+Alternatively, if you prefer using it as an ES6 module, you can use [this fork](https://github.com/getkey/gstatsjs) that can be installed through NPM:
+
+```sh
+$ npm install gstats # for npm users
+$ yarn add gstats # for yarn users
+```
+
 # Remarks
 
 ~~Due to [bug of cacheAsBitmap on Graphics on PIXIv4](https://github.com/pixijs/pixi.js/issues/4692),  TextureCounter incorrectly gets the number of textures.~~
