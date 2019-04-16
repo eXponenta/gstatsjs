@@ -9,11 +9,11 @@ namespace GStats{
 				return;
 			}
 
-			if(app.renderer instanceof PIXI.WebGLRenderer){
+			if(app.renderer instanceof (PIXI.Renderer || PIXI.WebGLRenderer)){
 				
 				this.attach(app.renderer.gl);
 
-				var start_textures = app.renderer.textureManager._managedTextures;
+				var start_textures = (app.renderer.texture || app.renderer.textureManager)._managedTextures;
 				
 				if(start_textures && this.texturehook){
 					console.log("[PIXI Hooks] Collect used textures:", start_textures.length);
