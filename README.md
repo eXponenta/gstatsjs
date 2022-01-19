@@ -1,3 +1,10 @@
+# NOT LONGER SUPPORTED
+
+Please, use a https://github.com/ErikSom/gamestats/
+
+This is similar lib with gstats core features
+
+
 # gstatsjs
 Graphics statistics (Texture count, DrawPasses) for WebGL applications. Capability with [stats.js](https://github.com/mrdoob/stats.js)
 
